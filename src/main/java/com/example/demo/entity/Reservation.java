@@ -25,19 +25,20 @@ public class Reservation {
 
     private LocalDateTime endAt;
 
-    private String status; // PENDING, APPROVED, CANCELED, EXPIRED
+    @Enumerated(value = EnumType.STRING)
+    private ReservationStatus reservationStatus; // PENDING, APPROVED, CANCELED, EXPIRED
 
-    public Reservation(Item item, User user, String status, LocalDateTime startAt, LocalDateTime endAt) {
+    public Reservation(Item item, User user, String reservationStatus, LocalDateTime startAt, LocalDateTime endAt) {
         this.item = item;
         this.user = user;
-        this.status = status;
+        this.reservationStatus = ReservationStatus.of(reservationStatus);
         this.startAt = startAt;
         this.endAt = endAt;
     }
 
     public Reservation() {}
 
-    public void updateStatus(String status) {
-        this.status = status;
+    public void updateStatus(String reservationStatus) {
+        this.reservationStatus = ReservationStatus.of(reservationStatus);
     }
 }
